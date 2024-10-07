@@ -88,6 +88,12 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.roles-img:hover {
+    transform: scale(1.1);
 }
 
 .roles-img img {
