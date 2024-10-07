@@ -1,0 +1,103 @@
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5F96E9;
+    padding: 30px;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 330px;
+    height: 500px; /* Increased height to fit the roles */
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures the roles are at the bottom */
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+}
+
+.utn_logo img {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+}
+
+.texto_logo {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.texto_logo p {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    color: #878787;
+}
+
+.texto {
+    text-align: center;
+}
+
+.texto_titulo h1 {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.texto_titulo h3 {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.texto_parrafo {
+    text-align: left;
+    margin-top: 50px;
+    padding: 5px;
+}
+
+.roles-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.roles-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.roles-img {
+    width: 60px;
+    height: 60px;
+    background-color: #6AA2E6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roles-img img {
+    width: 40px;
+    height: 40px;
+}
+
+.roles-titulo {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
