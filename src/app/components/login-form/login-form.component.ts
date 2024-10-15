@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css'
 })
-export class LoginFormComponent {
-  constructor(private router: Router) {}
+export class LoginFormComponent implements OnInit{
+
+  imageUrl: string | null = null;
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.imageUrl = params['image'];
+    });
+  }
 
   goBack() {
     this.router.navigate(['/login']);

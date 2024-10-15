@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private router: Router) {}
 
-  navigateToLoginForm() {
-    this.router.navigate(['/login-form']);
+  navigateToLoginForm(imagePath: string) {
+    this.router.navigate(['/login-form'], { queryParams: { image: imagePath } });
   }
 }

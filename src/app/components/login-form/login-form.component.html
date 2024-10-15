@@ -1,9 +1,11 @@
 <section class="login-form-container">
-    <!-- <div class="back-arrow" (click)="goBack()">
-      <img src="../../../assets/arrow.png" alt="Back">
-    </div> -->
     <div class="login-form-content">
-      <img src="../../../assets/construction.png" alt="Construction Image" class="header-image">
+      <div class="container-header-image">
+        <div class="back-arrow" (click)="goBack()">
+          <img src="../../../assets/arrow.png" alt="Back">
+        </div>
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Header Image" class="header-image">
+      </div>
       <h1>Inicio de Sesion</h1>
       <h3>Sistema de Gestion de Mantenimiento FRVT</h3>
   

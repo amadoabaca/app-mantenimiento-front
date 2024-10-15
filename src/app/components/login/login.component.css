@@ -10,12 +10,12 @@ section {
 
 .container {
     width: 330px;
-    height: 500px; /* Increased height to fit the roles */
+    height: 500px; 
     background-color: #ffffff;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensures the roles are at the bottom */
+    justify-content: space-between; 
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -68,7 +68,7 @@ section {
 
 .roles-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 30px;
 }
