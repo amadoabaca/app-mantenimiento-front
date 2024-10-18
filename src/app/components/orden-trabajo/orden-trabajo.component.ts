@@ -12,6 +12,6 @@ export class OrdenTrabajoComponent {
   constructor(private router: Router) {}
 
   goBack() {
-    this.router.navigate(['/anterior-componente']); // Cambia la ruta al componente anterior
+    this.router.navigate(['/dashboard-admin']); // Cambia la ruta al componente anterior
   }
 }
