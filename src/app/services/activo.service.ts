@@ -12,14 +12,15 @@ export class ActivoService {
 
   constructor(private http: HttpClient) {}
 
-  // crear activo
-  crearActivo(activo: Activo): Observable<Activo> {
-    return this.http.post<Activo>(this.apiUrl, activo);
-  }
-
   // traer activos
   obtenerActivos(): Observable<Activo[]> {
     return this.http.get<Activo[]>(this.apiUrl);
   }
+
+  // crear activo (opcional)
+  crearActivo(activo: Activo): Observable<Activo> {
+    return this.http.post<Activo>(this.apiUrl, activo);
+  }
+
 }
 
