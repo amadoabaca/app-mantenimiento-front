@@ -12,7 +12,7 @@
   .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
     font-size: 14px;
     padding: 15px;
     margin-top: 15px;
@@ -86,11 +86,31 @@ h3 {
   width: 90%;
   font-size: 16px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .solicitar-button:hover {
   background-color: #3A7BAE; 
 }
+
+.registrar-button {
+  background-color: #4D9DE0;
+  color: white;
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 60%;
+  font-size: 14px;
+  font-weight: bold;
+  
+}
+
+.registrar-button:hover {
+  background-color: #3b7bac; 
+}
+
+
 
   .card-secundario {
     background-color: #ffffff; 

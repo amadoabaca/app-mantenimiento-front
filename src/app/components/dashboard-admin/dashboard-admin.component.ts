@@ -12,10 +12,20 @@ export class DashboardAdminComponent {
   constructor(private router: Router) {}
 
   goBack() {
-    this.router.navigate(['/anterior-componente']); // Cambia la ruta al componente anterior
+    this.router.navigate(['/anterior-componente']);
   }
 
   navigateToOT() {
     this.router.navigate(['/orden-trabajo']);
   }
+
+  navigateToSolicitud() {
+    this.router.navigate(['/orden-trabajo-form']);
+  }
+
+  navigateToRegistro() {
+    this.router.navigate(['/registro']);
+  }
 }
+
+

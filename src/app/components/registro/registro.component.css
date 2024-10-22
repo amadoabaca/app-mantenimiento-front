@@ -84,3 +84,18 @@ input {
 .login-button:hover {
     background-color: #5F96E9;
 }
+
+.back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px; 
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+
+  .back-arrow img{
+    width: 20px;
+    height: 20px; 
+    z-index: 10;
+  }
