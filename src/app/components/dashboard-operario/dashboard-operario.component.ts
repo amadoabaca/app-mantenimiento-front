@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-operario',
@@ -8,5 +9,17 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard-operario.component.css'
 })
 export class DashboardOperarioComponent {
+  constructor(private router: Router) {}
 
+  goBack() {
+    this.router.navigate(['/anterior-componente']);
+  }
+
+  navigateToOT() {
+    this.router.navigate(['/orden-trabajo']);
+  }
+
+  navigateToSolicitud() {
+    this.router.navigate(['/orden-trabajo-form']);
+  }
 }

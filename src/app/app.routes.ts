@@ -6,6 +6,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
 import { OrdenTrabajoFormComponent } from './components/orden-trabajo-form/orden-trabajo-form.component';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
+import { DashboardOperarioComponent } from './components/dashboard-operario/dashboard-operario.component';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'orden-trabajo', component: OrdenTrabajoComponent },
   { path: 'orden-trabajo-form', component: OrdenTrabajoFormComponent },
   { path: 'dashboard-admin', component: DashboardAdminComponent },
+  { path: 'dashboard-operario', component: DashboardOperarioComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
   ];
