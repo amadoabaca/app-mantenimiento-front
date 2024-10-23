@@ -11,6 +11,9 @@ import { EdificioService } from '../../services/edificio.service';
 import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
 import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
 import { CommonModule } from '@angular/common';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 
 @Component({
   selector: 'app-orden-trabajo-form',
@@ -50,89 +53,124 @@ export class OrdenTrabajoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      // Carga los datos al inicializar el componente
-    this.obtenerOperarios();
-    this.obtenerEdificios();
-    this.obtenerPisos();
-    this.obtenerSectores();
-    this.obtenerUbicaciones();
-    this.obtenerActivos();
+    try {
+      this.obtenerOperarios();
+      this.obtenerEdificios();
+      this.obtenerPisos();
+      this.obtenerSectores();
+      this.obtenerUbicaciones();
+      this.obtenerActivos();
+    } catch (error) {
+      console.error('Error en ngOnInit:', error);
+    }
   }
 
   goBack() {
-    this.router.navigate(['/dashboard-admin']); 
+    this.router.navigate(['/dashboard-admin']);
   }
 
-  // Obtener datos desde el backend
   obtenerOperarios() {
-    // Asume que tienes un servicio de UserService que trae los operarios
-    this.userService.obtenerOperarios().subscribe(data => {
+    this.userService.obtenerOperarios().pipe(
+      catchError(error => {
+        console.error('Error al obtener operarios:', error);
+        return of([]); 
+      })
+    ).subscribe(data => {
       this.operarios = data;
     });
   }
 
   obtenerEdificios() {
-    this.edificioService.obtenerEdificios().subscribe(data => {
+    this.edificioService.obtenerEdificios().pipe(
+      catchError(error => {
+        console.error('Error al obtener edificios:', error);
+        return of([]);
+      })
+    ).subscribe(data => {
       this.edificios = data;
     });
   }
 
   obtenerPisos() {
-    this.pisoService.obtenerPisos().subscribe(data => {
+    this.pisoService.obtenerPisos().pipe(
+      catchError(error => {
+        console.error('Error al obtener pisos:', error);
+        return of([]);
+      })
+    ).subscribe(data => {
       this.pisos = data;
     });
   }
 
   obtenerSectores() {
-    this.sectorService.obtenerSectores().subscribe(data => {
+    this.sectorService.obtenerSectores().pipe(
+      catchError(error => {
+        console.error('Error al obtener sectores:', error);
+        return of([]); 
+      })
+    ).subscribe(data => {
       this.sectores = data;
     });
   }
 
   obtenerUbicaciones() {
-    this.ubicacionService.obtenerUbicaciones().subscribe(data => {
+    this.ubicacionService.obtenerUbicaciones().pipe(
+      catchError(error => {
+        console.error('Error al obtener ubicaciones:', error);
+        return of([]); 
+      })
+    ).subscribe(data => {
       this.ubicaciones = data;
     });
   }
 
   obtenerActivos() {
-    this.activoService.obtenerActivos().subscribe(data => {
+    this.activoService.obtenerActivos().pipe(
+      catchError(error => {
+        console.error('Error al obtener activos:', error);
+        return of([]); 
+      })
+    ).subscribe(data => {
       this.activos = data;
     });
   }
 
+  // Enviar la solicitud al back 
+  enviarSolicitud() {
+    try {
+      this.ordenTrabajoService.crearOrdenTrabajo(this.ordenTrabajo).subscribe(response => {
+        console.log('Orden de trabajo creada:', response);
+        this.router.navigate(['/dashboard-admin']);
+      }, error => {
+        console.error('Error al crear la orden de trabajo:', error);
+      });
+    } catch (error) {
+      console.error('Error inesperado al enviar la solicitud:', error);
+    }
+  }
+
   onOperarioChange(event: any) {
-    this.ordenTrabajo.operario = String (event.target.value);
+    this.ordenTrabajo.operario = String(event.target.value);
   }
 
   onEdificioChange(event: any) {
-    this.ordenTrabajo.edificio = String (event.target.value);
+    this.ordenTrabajo.edificio = String(event.target.value);
   }
 
   onPisoChange(event: any) {
-    this.ordenTrabajo.piso = String (event.target.value);
+    this.ordenTrabajo.piso = String(event.target.value);
   }
 
   onSectorChange(event: any) {
-    this.ordenTrabajo.sector = String (event.target.value);
+    this.ordenTrabajo.sector = String(event.target.value);
   }
 
   onUbicacionChange(event: any) {
-    this.ordenTrabajo.ubicacion = String (event.target.value);
+    this.ordenTrabajo.ubicacion = String(event.target.value);
   }
 
   onActivoChange(event: any) {
-    this.ordenTrabajo.activo = String (event.target.value);
-  }
-
-  // Enviar la solicitud al backend
-  enviarSolicitud() {
-    this.ordenTrabajoService.crearOrdenTrabajo(this.ordenTrabajo).subscribe(response => {
-      console.log('Orden de trabajo creada:', response);
-      this.router.navigate(['/dashboard-admin']);  // redireccionar si es necesario
-    }, error => {
-      console.error('Error al crear la orden de trabajo:', error);
-    });
+    this.ordenTrabajo.activo = String(event.target.value);
   }
 }
 
