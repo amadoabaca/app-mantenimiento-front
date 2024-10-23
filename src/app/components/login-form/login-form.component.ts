@@ -24,6 +24,8 @@ export class LoginFormComponent implements OnInit{
     this.router.navigate(['/login']);
   }
 
+  
+
   navigateToDashboard() {
     this.router.navigate(['/dashboard-admin']); //modificar para que redirija al componente dependiendo del rol que tenga el usuario
   }

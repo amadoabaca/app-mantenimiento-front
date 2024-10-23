@@ -12,7 +12,7 @@ export class DashboardOperarioComponent {
   constructor(private router: Router) {}
 
   goBack() {
-    this.router.navigate(['/anterior-componente']);
+    this.router.navigate(['/login-form']);
   }
 
   navigateToOT() {
