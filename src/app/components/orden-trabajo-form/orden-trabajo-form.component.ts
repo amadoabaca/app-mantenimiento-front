@@ -64,7 +64,7 @@ export class OrdenTrabajoFormComponent implements OnInit {
       console.error('Error en ngOnInit:', error);
     }
   }
-
+// Funcion para volver al componente dashboard
   goBack() {
     this.router.navigate(['/dashboard-admin']);
   }
@@ -148,6 +148,7 @@ export class OrdenTrabajoFormComponent implements OnInit {
       console.error('Error inesperado al enviar la solicitud:', error);
     }
   }
+  //Funciones para capturar los datos seleccionados en los select y actualiza ordenTrabajo
 
   onOperarioChange(event: any) {
     this.ordenTrabajo.operario = String(event.target.value);
