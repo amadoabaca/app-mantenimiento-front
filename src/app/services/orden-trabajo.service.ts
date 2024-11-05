@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { OrdenTrabajo } from '../interfaces/orden-trabajo';
-import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -9,28 +7,78 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrdenTrabajoService {
   private apiUrl = 'http://localhost:3000/api/orden-trabajo';
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  crearOrdenTrabajo(orden: OrdenTrabajo): Observable<OrdenTrabajo> {
-    return this.http.post<OrdenTrabajo>(this.apiUrl, orden);
+  async crearOrdenTrabajo(orden: OrdenTrabajo): Promise<OrdenTrabajo> {
+    const response = await fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orden),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
-  listaOrdenTrabajo(): Observable<OrdenTrabajo[]>{
-    return this.http.get<OrdenTrabajo[]>(this.apiUrl);
+  
+  async listaOrdenTrabajo(): Promise<OrdenTrabajo[]> {
+    const response = await fetch(this.apiUrl);
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
+  
+  async getOrdenTrabajo(id: any): Promise<OrdenTrabajo> {
+    const response = await fetch(`${this.apiUrl}/${id}`);
 
-  getOrdenDetrabajo(id:any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
-  deleteOrdenTrabajo(id: any):Observable<OrdenTrabajo> {
-    return this.http.delete<OrdenTrabajo>(`${this.apiUrl}/${id}`);
+  
+  async deleteOrdenTrabajo(id: any): Promise<OrdenTrabajo> {
+    const response = await fetch(`${this.apiUrl}/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
-  updateOrdenTrabajo(id: any, ot: OrdenTrabajo):Observable<OrdenTrabajo> {
-    console.log("orden: ", ot);
-    return this.http.patch<OrdenTrabajo>(`${this.apiUrl}/${id}`, ot);
-  }
+  
+  async updateOrdenTrabajo(id: any, ot: OrdenTrabajo): Promise<OrdenTrabajo> {
+    const response = await fetch(`${this.apiUrl}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ot),
+    });
 
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
+  }
 }

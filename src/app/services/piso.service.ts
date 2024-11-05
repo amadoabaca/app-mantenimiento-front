@@ -1,23 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Piso } from '../interfaces/piso';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PisoService {
-  private apiUrl = 'http://localhost:3000/api/piso'; 
+  private apiUrl = 'http://localhost:3000/api/lista-pisos'; 
   
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // crear piso
-  crearPiso(piso: Piso): Observable<Piso> {
-    return this.http.post<Piso>(this.apiUrl, piso);
+  async crearPiso(piso: Piso): Promise<Piso> {
+    const response = await fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(piso),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
-  // traer piso
-  obtenerPisos(): Observable<Piso[]> {
-    return this.http.get<Piso[]>(this.apiUrl);
+  
+  async obtenerPisos(): Promise<Piso[]> {
+    const response = await fetch(this.apiUrl);
+    
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 }

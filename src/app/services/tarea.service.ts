@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Tarea } from '../interfaces/tarea';
 
 @Injectable({
@@ -10,15 +8,34 @@ export class TareaService {
 
   private apiUrl = 'http://localhost:3000/api/tarea'; 
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // crear tarea
-  crearTarea(tarea: Tarea): Observable<Tarea> {
-    return this.http.post<Tarea>(this.apiUrl,tarea);
+  async crearTarea(tarea: Tarea): Promise<Tarea> {
+    const response = await fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(tarea),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 
-  // traer tarea
-  obtenerTareas(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>(this.apiUrl);
+  
+  async obtenerTareas(): Promise<Tarea[]> {
+    const response = await fetch(this.apiUrl);
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error);
+    }
+
+    return await response.json();
   }
 }

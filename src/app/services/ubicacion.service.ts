@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { UbicacionActivo } from '../interfaces/ubicacion';
 
 @Injectable({
@@ -8,17 +6,41 @@ import { UbicacionActivo } from '../interfaces/ubicacion';
 })
 export class UbicacionService {
 
-  private apiUrl = 'http://localhost:3000/api/ubicacion'; 
+  private apiUrl = 'http://localhost:3000/api/lista-ubi-activos'; 
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // crear ubicacion
-  crearUbicacion(ubicacion: UbicacionActivo): Observable<UbicacionActivo> {
-    return this.http.post<UbicacionActivo>(this.apiUrl,ubicacion);
+  async crearUbicacion(ubicacion: UbicacionActivo): Promise<UbicacionActivo> {
+    const response = await fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ubicacion),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Error al crear la ubicación de activo');
+    }
+
+    return await response.json();
   }
 
-  // traer ubicacion
-  obtenerUbicaciones(): Observable<UbicacionActivo[]> {
-    return this.http.get<UbicacionActivo[]>(this.apiUrl);
+  
+  async obtenerUbicaciones(): Promise<UbicacionActivo[]> {
+    const response = await fetch(this.apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Error al obtener ubicaciones de activos');
+    }
+
+    return await response.json();
   }
 }
