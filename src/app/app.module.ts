@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 
@@ -10,7 +12,8 @@ import { provideHttpClient } from '@angular/common/http';
 @NgModule({
     imports: [
       BrowserModule,
-      AppRoutingModule
+      AppRoutingModule,
+      FormsModule,
     ],
     providers: [provideHttpClient()], 
 

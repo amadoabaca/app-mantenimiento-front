@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Activo } from '../interfaces/activo';
 
 @Injectable({
@@ -8,19 +6,41 @@ import { Activo } from '../interfaces/activo';
 })
 export class ActivoService {
 
-  private apiUrl = 'http://localhost:3000/api/activo';  // modificar ruta en el back app.js
+  private apiUrl = 'http://localhost:3000/api/activos';
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  // traer activos
-  obtenerActivos(): Observable<Activo[]> {
-    return this.http.get<Activo[]>(this.apiUrl);
+
+  async obtenerActivos(): Promise<Activo[]> {
+    const response = await fetch(this.apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Error al obtener activos');
+    }
+
+    return await response.json();
   }
+  async crearActivo(activo: Activo): Promise<Activo> {
+    const response = await fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(activo),
+    });
 
-  // crear activo (opcional)
-  crearActivo(activo: Activo): Observable<Activo> {
-    return this.http.post<Activo>(this.apiUrl, activo);
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.error || 'Error al crear activo');
+    }
+
+    return await response.json();
   }
-
 }
 
