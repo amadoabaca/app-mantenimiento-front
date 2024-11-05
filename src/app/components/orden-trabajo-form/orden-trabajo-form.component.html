@@ -1,4 +1,3 @@
-
 <section class="generar-orden-container">
     <div class="form-header">
         <div class="back-arrow" (click)="goBack()">
@@ -12,57 +11,43 @@
   
     <div class="form-body">
       <div class="form-group">
-        <label for="operario"> Operario:</label>
-        <select id="operario" class="form-control" [(ngModel)]="ordenTrabajo.operario" (change)="onOperarioChange($event)">
-            <option value="">Seleccione un operario</option>
-            <option *ngFor="let operario of operarios" [value]="operario.id">{{ operario.nombre }}</option>
-          </select>
-          
-      </div>
-  
-      <div class="form-group">
-        <label for="edificio"> Edificio:</label>
+        <label for="edificio">Edificio:</label>
         <select id="edificio" class="form-control" [(ngModel)]="ordenTrabajo.edificio" (change)="onEdificioChange($event)">
-            <option value="">Seleccione un edificio</option>
-            <option *ngFor="let edificio of edificios" [value]="edificio.id">{{ edificio.nombre }}</option>
-          </select>
+          <option value="">Seleccione un edificio</option>
+          <option *ngFor="let edificio of getUniqueEdificios()" [value]="edificio.id">{{ edificio.nombre }}</option>
+        </select>
       </div>
   
       <div class="form-group">
-        <label for="piso"> Piso/Nivel:</label>
+        <label for="piso">Piso/Nivel:</label>
         <select id="piso" class="form-control" [(ngModel)]="ordenTrabajo.piso" (change)="onPisoChange($event)">
           <option value="">Seleccione un piso o nivel</option>
-          <option *ngFor="let piso of pisos" [value]="piso.id">{{ piso.nombre }}</option>
+          <option *ngFor="let piso of getUniquePisos()" [value]="piso.id">{{ piso.piso }}</option>
         </select>
       </div>
   
       <div class="form-group">
-        <label for="sector"> Sector:</label>
+        <label for="sector">Sector:</label>
         <select id="sector" class="form-control" [(ngModel)]="ordenTrabajo.sector" (change)="onSectorChange($event)">
           <option value="">Seleccione un sector</option>
-          <option *ngFor="let sector of sectores" [value]="sector.id">{{ sector.nombre }}</option>
+          <option *ngFor="let sector of getUniqueSectores()" [value]="sector.id">{{ sector.sector }}</option>
         </select>
       </div>
   
       <div class="form-group">
-        <label for="ubicacion"> Ubicación:</label>
+        <label for="ubicacion">Ubicación:</label>
         <select id="ubicacion" class="form-control" [(ngModel)]="ordenTrabajo.ubicacion" (change)="onUbicacionChange($event)">
           <option value="">Seleccione una ubicación</option>
-          <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion.id">{{ ubicacion.nombre }}</option>
+          <option *ngFor="let ubicacion of getUniqueUbicaciones()" [value]="ubicacion.id">{{ ubicacion.ubicacion }}</option>
         </select>
       </div>
   
       <div class="form-group">
-        <label for="tipoActivo"> Tipo de Activo:</label>
+        <label for="tipoActivo">Tipo de Activo:</label>
         <select id="tipoActivo" class="form-control" [(ngModel)]="ordenTrabajo.activo" (change)="onActivoChange($event)">
           <option value="">Seleccione un tipo de activo</option>
-          <option *ngFor="let activo of activos" [value]="activo.id">{{ activo.nombre }}</option>
+          <option *ngFor="let activo of getUniqueActivos()" [value]="activo.id">{{ activo.tipo }}</option>
         </select>
-      </div>
-  
-      <div class="form-group">
-        <label for="instrucciones">Instrucciones de la Tarea:</label>
-        <textarea id="instrucciones" class="form-control" [(ngModel)]="ordenTrabajo.instrucciones" placeholder="Escriba las instrucciones de la tarea"></textarea>
       </div>
   
       <button class="submit-button" (click)="enviarSolicitud()">Enviar Solicitud</button>

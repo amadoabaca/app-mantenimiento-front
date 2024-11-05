@@ -9,18 +9,25 @@
       <h1>Registro de Usuario</h1>
       <h3>Sistema de Gestion de Mantenimiento FRVT</h3>
   
-      <label for="username">Usuario</label>
-      <input id="username" type="text" placeholder="Ingrese su Usuario">
+      <label for="username">Nombre</label>
+    <input id="username" type="text" [(ngModel)]="username" placeholder="Ingrese su Nombre">
+    <label for="apellido">Apellido</label>
+    <input id="apellido" type="text" [(ngModel)]="apellido" placeholder="Ingrese su apellido">
+    <label for="tipoUsuario">Tipo de Usuario</label>
+    <select [(ngModel)]="tipoUsuario" id="tipoUsuario" name="tipoUsuario">
+      <option value="operario">Operario</option>
+      <option value="Administrativo">Administrativo</option>
+    </select>
 
-      <label for="tipoUsuario">Tipo de Usuario</label>
-        <select class="tipoUsuario" id="tipoUsuario" name="tipoUsuario">
-            <option value="operario">Operario</option>
-            <option value="admin">Administrador</option>
-        </select>
-  
-      <label for="password">Contraseña</label>
-      <input id="password" type="password" placeholder="Ingrese su Contraseña">
-  
-      <button class="login-button">Registrar</button>
+    <label for="email">Email</label>
+    <input id="email" type="email" [(ngModel)]="email" placeholder="Ingrese su Email">
+    
+    <label for="password">Contraseña</label>
+    <input id="password" type="password" [(ngModel)]="password" placeholder="Ingrese su Contraseña">
+
+    <button class="login-button" (click)="register()">Registrar</button>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
     </div>
+  </div>
   </section>

@@ -157,3 +157,20 @@ h3 {
     font-size: 12px;
     color: #999999; 
   }
+  @media (min-width: 1200px) {
+    .orden-trabajo-container {
+        padding: 50px; 
+    }
+  
+    .header-text {
+        font-size: 28px; 
+    }
+  
+    .text-card-principal h3 {
+        font-size: 32px; /* Aumentar tamaño en pantallas grandes */
+    }
+  
+    .text-card-secundario p {
+        font-size: 20px; 
+    }
+  }

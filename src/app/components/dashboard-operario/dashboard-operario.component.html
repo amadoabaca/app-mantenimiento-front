@@ -20,29 +20,14 @@
           <p>Mis Ordenes de Trabajo</p>
         </div>
       
-        <div class="solicitud-item" (click)="navigateToOT()">
+        <div *ngFor="let orden of ordenesTrabajo" class="solicitud-item" (click)="navigateToOT(orden.id)">
           <div class="solicitud-info">
-            <p class="solicitud-title">Cambio de foco</p>
-            <small>Aula 17</small>
+            <p class="solicitud-title">{{ orden || 'Nombre de la Tarea' }}</p>
+            <small>{{ orden.sector }} - {{ orden.piso }}</small>
           </div>
-          <span class="solicitud-id">#00001</span>
+          <span class="solicitud-id">#{{ orden }}</span>
         </div>
-      
-        <div class="solicitud-item" (click)="navigateToOT()">
-          <div class="solicitud-info">
-            <p class="solicitud-title">Cerradura rota</p>
-            <small>Aula 5</small>
-          </div>
-          <span class="solicitud-id">#00002</span>
-        </div>
-      
-        <div class="solicitud-item" (click)="navigateToOT()">
-          <div class="solicitud-info">
-            <p class="solicitud-title">No funciona toma corriente</p>
-            <small>Administración</small>
-          </div>
-          <span class="solicitud-id">#00003</span>
-        </div>
+        
       </div>
       
   </section>

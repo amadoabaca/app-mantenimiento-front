@@ -11,9 +11,6 @@ import { EdificioService } from '../../services/edificio.service';
 import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
 import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
 import { CommonModule } from '@angular/common';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-
 
 @Component({
   selector: 'app-orden-trabajo-form',
@@ -52,103 +49,118 @@ export class OrdenTrabajoFormComponent implements OnInit {
     private ordenTrabajoService: OrdenTrabajoService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     try {
-      this.obtenerOperarios();
-      this.obtenerEdificios();
-      this.obtenerPisos();
-      this.obtenerSectores();
-      this.obtenerUbicaciones();
-      this.obtenerActivos();
+      await this.obtenerDatos();
     } catch (error) {
       console.error('Error en ngOnInit:', error);
     }
   }
-// Funcion para volver al componente dashboard
+
+  private async obtenerDatos(): Promise<void> {
+    await Promise.all([
+      this.obtenerEdificios(),
+      this.obtenerPisos(),
+      this.obtenerSectores(),
+      this.obtenerUbicaciones(),
+      this.obtenerActivos()
+    ]);
+  }
+
   goBack() {
     this.router.navigate(['/dashboard-admin']);
   }
 
-  obtenerOperarios() {
-    this.userService.obtenerOperarios().pipe(
-      catchError(error => {
-        console.error('Error al obtener operarios:', error);
-        return of([]); 
-      })
-    ).subscribe(data => {
-      this.operarios = data;
-    });
-  }
-
-  obtenerEdificios() {
-    this.edificioService.obtenerEdificios().pipe(
-      catchError(error => {
-        console.error('Error al obtener edificios:', error);
-        return of([]);
-      })
-    ).subscribe(data => {
-      this.edificios = data;
-    });
-  }
-
-  obtenerPisos() {
-    this.pisoService.obtenerPisos().pipe(
-      catchError(error => {
-        console.error('Error al obtener pisos:', error);
-        return of([]);
-      })
-    ).subscribe(data => {
-      this.pisos = data;
-    });
-  }
-
-  obtenerSectores() {
-    this.sectorService.obtenerSectores().pipe(
-      catchError(error => {
-        console.error('Error al obtener sectores:', error);
-        return of([]); 
-      })
-    ).subscribe(data => {
-      this.sectores = data;
-    });
-  }
-
-  obtenerUbicaciones() {
-    this.ubicacionService.obtenerUbicaciones().pipe(
-      catchError(error => {
-        console.error('Error al obtener ubicaciones:', error);
-        return of([]); 
-      })
-    ).subscribe(data => {
-      this.ubicaciones = data;
-    });
-  }
-
-  obtenerActivos() {
-    this.activoService.obtenerActivos().pipe(
-      catchError(error => {
-        console.error('Error al obtener activos:', error);
-        return of([]); 
-      })
-    ).subscribe(data => {
-      this.activos = data;
-    });
-  }
-
-  // Enviar la solicitud al back 
-  enviarSolicitud() {
+  async obtenerEdificios(): Promise<void> {
     try {
-      this.ordenTrabajoService.crearOrdenTrabajo(this.ordenTrabajo).subscribe(response => {
-        console.log('Orden de trabajo creada:', response);
-        this.router.navigate(['/dashboard-admin']);
-      }, error => {
-        console.error('Error al crear la orden de trabajo:', error);
-      });
+      this.edificios = await this.edificioService.obtenerEdificios(); 
     } catch (error) {
-      console.error('Error inesperado al enviar la solicitud:', error);
+      console.error('Error al obtener edificios:', error);
+      this.edificios = []; 
     }
   }
-  //Funciones para capturar los datos seleccionados en los select y actualiza ordenTrabajo
+
+  async obtenerPisos(): Promise<void> {
+    try {
+      this.pisos = await this.pisoService.obtenerPisos(); 
+    } catch (error) {
+      console.error('Error al obtener pisos:', error);
+      this.pisos = []; 
+    }
+  }
+
+  async obtenerSectores(): Promise<void> {
+    try {
+      this.sectores = await this.sectorService.obtenerSectores();
+    } catch (error) {
+      console.error('Error al obtener sectores:', error);
+      this.sectores = []; 
+    }
+  }
+
+  async obtenerUbicaciones(): Promise<void> {
+    try {
+      this.ubicaciones = await this.ubicacionService.obtenerUbicaciones();
+    } catch (error) {
+      console.error('Error al obtener ubicaciones:', error);
+      this.ubicaciones = []; 
+    }
+  }
+
+  async obtenerActivos(): Promise<void> {
+    try {
+      this.activos = await this.activoService.obtenerActivos();
+    } catch (error) {
+      console.error('Error al obtener activos:', error);
+      this.activos = []; 
+    }
+  }
+
+
+  getUniqueEdificios() {
+    const unique = new Set(this.edificios.map(edificio => edificio.nombre));
+    return Array.from(unique).map(nombre => 
+      this.edificios.find(edificio => edificio.nombre === nombre)
+    );
+  }
+
+  getUniquePisos() {
+    const unique = new Set(this.pisos.map(piso => piso.piso));
+    return Array.from(unique).map(piso => 
+      this.pisos.find(p => p.piso === piso)
+    );
+  }
+
+  getUniqueSectores() {
+    const unique = new Set(this.sectores.map(sector => sector.sector));
+    return Array.from(unique).map(sector => 
+      this.sectores.find(s => s.sector === sector)
+    );
+  }
+
+  getUniqueUbicaciones() {
+    const unique = new Set(this.ubicaciones.map(ubicacion => ubicacion.ubicacion));
+    return Array.from(unique).map(ubicacion => 
+      this.ubicaciones.find(u => u.ubicacion === ubicacion)
+    );
+  }
+
+  getUniqueActivos() {
+    const unique = new Set(this.activos.map(activo => activo.tipo));
+    return Array.from(unique).map(tipo => 
+      this.activos.find(a => a.tipo === tipo)
+    );
+  }
+
+  async enviarSolicitud(): Promise<void> {
+    try {
+      const response = await this.ordenTrabajoService.crearOrdenTrabajo(this.ordenTrabajo);
+      console.log('Orden de trabajo creada:', response);
+      this.router.navigate(['/dashboard-admin']);
+    } catch (error) {
+      console.error('Error al crear la orden de trabajo:', error);
+    }
+  }
 
   onOperarioChange(event: any) {
     this.ordenTrabajo.operario = String(event.target.value);
@@ -174,4 +186,3 @@ export class OrdenTrabajoFormComponent implements OnInit {
     this.ordenTrabajo.activo = String(event.target.value);
   }
 }
-
