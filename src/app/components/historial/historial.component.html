@@ -19,16 +19,17 @@
     <div class="card">
         <div class="text-card">
           <h3>Ordenes de Trabajo</h3>
-
         </div>
 
-        <div class="solicitud-item">
+        <div *ngIf="ordenesCargadas">
+          <div class="solicitud-item" *ngFor="let orden of listaOrdenes">
             <div class="solicitud-info">
-              <p class="solicitud-title">ILUM - Iluminacion</p>
-              <small>Aula 17</small>
+              <p class="solicitud-title">{{orden.activo}}</p>
+              <small>{{orden.ubicacion}}</small>
             </div>
-            <span class="solicitud-id">#00001</span>
+            <span class="solicitud-id">{{orden.id}}</span>
           </div>
+        </div>
 
       </div>
       
