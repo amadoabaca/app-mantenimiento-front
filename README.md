@@ -11,7 +11,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Elige el perfil asignado para acceder al sistema.
 </p>
 
-![Login](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/1-login.png)
+![Login](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/1-login.png)
 
 ---
 
@@ -20,7 +20,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Ingresa tus credenciales (usuario y contraseña) para autenticarse en el sistema.
 </p>
 
-![Login](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/2-login.png)
+![Login](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/2-login.png)
 
 ---
 
@@ -29,7 +29,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Una vez autenticado, los operarios tienen acceso a un panel personalizado que les permite gestionar sus ordenes de trabajo.
 </p>
 
-![Panel de control operario](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/4-panel-operario.png)
+![Panel de control operario](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/4-panel-operario.png)
 
 ---
 
@@ -38,7 +38,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Los administradores tienen acceso a un panel avanzado con opciones para gestionar usuarios, solicitudes y ver el historial de OT.
 </p>
 
-![Panel de control administrador](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/5-panel-admin.png)
+![Panel de control administrador](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/5-panel-admin.png)
 
 ---
 
@@ -47,7 +47,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Los operarios pueden solicitar una orden de trabajo a través de un formulario.
 </p>
 
-![Solicitar OT](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/7-generar-orden-trabajo.png)
+![Solicitar OT](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/7-generar-orden-trabajo.png)
 
 ---
 
@@ -56,7 +56,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Los administradores tienen la posibilidad de registrar nuevos usuarios en el sistema mediante un formulario de registro.
 </p>
 
-![Registro](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/8-registro.png)
+![Registro](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/8-registro.png)
 
 ---
 
@@ -65,7 +65,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Consulta el historial de órdenes de trabajo para obtener información sobre tareas anteriores.
 </p>
 
-![Historial](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/9-historial.png)
+![Historial](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/9-historial.png)
 
 ---
 
@@ -74,4 +74,4 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
   Detalle de una orden de trabajo específica.
 </p>
 
-![Ver OT](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/6-orden-trabajo.png)
+![Ver OT](https://github.com/amadoabaca/app-mantenimiento-front/blob/master/public/interfaz/6-orden-trabajo.png)
