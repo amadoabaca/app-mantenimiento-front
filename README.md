@@ -1,27 +1,77 @@
-# Front
+# Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 18.2.7.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Documentación
 
-## Code scaffolding
+## Seleccionar un perfil para ingresar
+<p align="left">
+  Elige el perfil asignado para acceder al sistema.
+</p>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Login](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/1-login.png)
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Ingresar usuario y contraseña
+<p align="left">
+  Ingresa tus credenciales (usuario y contraseña) para autenticarse en el sistema.
+</p>
 
-## Running unit tests
+![Login](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/2-login.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Panel de control operario
+<p align="left">
+  Una vez autenticado, los operarios tienen acceso a un panel personalizado que les permite gestionar sus ordenes de trabajo.
+</p>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Panel de control operario](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/4-panel-operario.png)
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Panel de control administrador
+<p align="left">
+  Los administradores tienen acceso a un panel avanzado con opciones para gestionar usuarios, solicitudes y ver el historial de OT.
+</p>
+
+![Panel de control administrador](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/5-panel-admin.png)
+
+---
+
+## 1. Solicitar orden de trabajo
+<p align="left">
+  Los operarios pueden solicitar una orden de trabajo a través de un formulario.
+</p>
+
+![Solicitar OT](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/7-generar-orden-trabajo.png)
+
+---
+
+## 2. Registrar usuario
+<p align="left">
+  Los administradores tienen la posibilidad de registrar nuevos usuarios en el sistema mediante un formulario de registro.
+</p>
+
+![Registro](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/8-registro.png)
+
+---
+
+## 3. Ver el historial de órdenes de trabajo
+<p align="left">
+  Consulta el historial de órdenes de trabajo para obtener información sobre tareas anteriores.
+</p>
+
+![Historial](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/9-historial.png)
+
+---
+
+## 4. Visualizar la orden de trabajo
+<p align="left">
+  Detalle de una orden de trabajo específica.
+</p>
+
+![Ver OT](https://github.com/amadoabaca/mantenimientoUTN/blob/master/frontend/public/interfaz/6-orden-trabajo.png)
