@@ -43,7 +43,7 @@
     border-radius: 10px;
     padding: 15px;
     margin-top: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.33);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,7 +55,7 @@
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin: 0;
+    margin: 0 0 30px 0;
   }
 
   .busqueda{
@@ -78,6 +78,38 @@
     cursor: pointer;
     font-size: 12px;
     width: 80%;
+  }
+
+  .solicitud-item {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    width: 90%;
+  }
+  
+  .solicitud-info {
+    flex: 1;
+  }
+  
+  .solicitud-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333; 
+  }
+  
+  .solicitud-info small {
+    color: #666666;
+  }
+  
+  .solicitud-id {
+    font-size: 12px;
+    color: #999999; 
   }
   
 
