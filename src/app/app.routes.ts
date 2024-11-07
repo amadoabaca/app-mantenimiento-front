@@ -7,6 +7,7 @@ import { OrdenTrabajoDetalleComponent } from './components/orden-trabajo/orden-t
 import { OrdenTrabajoFormComponent } from './components/orden-trabajo-form/orden-trabajo-form.component';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
 import { DashboardOperarioComponent } from './components/dashboard-operario/dashboard-operario.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'orden-trabajo-form', component: OrdenTrabajoFormComponent },
   { path: 'dashboard-admin', component: DashboardAdminComponent },
   { path: 'dashboard-operario', component: DashboardOperarioComponent },
+  { path: 'historial', component: HistorialComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
   ];
