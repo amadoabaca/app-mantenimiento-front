@@ -16,9 +16,6 @@
       </div>
       <div class="info">
         <div>
-          <strong>Solicitante: </strong> {{ ordenTrabajo.solicitante }}
-        </div>
-        <div>
           <strong>Edificio: </strong> {{ ordenTrabajo.edificio }}
         </div>
         <div>
@@ -34,8 +31,8 @@
           <strong>Estado de la Tarea: </strong> <span class="estado-pendiente"> Pendiente</span>
         </div>
       </div>
-      <h4>Instrucciones de la Tarea</h4>
-      <textarea placeholder="Describa la tarea a realizar">>{{ ordenTrabajo.instrucciones }}</textarea>
+      <h4>Tarea Asociada</h4>
+      <textarea readonly placeholder="Descripcion de la tarea">>{{ ordenTrabajo.instrucciones }}</textarea>
   
       <button class="finalizar-button">Finalizar Tarea</button>
     </div>
