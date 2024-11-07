@@ -6,7 +6,7 @@ import { Tarea } from '../interfaces/tarea';
 })
 export class TareaService {
 
-  private apiUrl = 'http://localhost:3000/api/tarea'; 
+  private apiUrl = 'http://localhost:3000/api/tareas'; 
 
   constructor() {}
 
@@ -29,7 +29,12 @@ export class TareaService {
 
   
   async obtenerTareas(): Promise<Tarea[]> {
-    const response = await fetch(this.apiUrl);
+    const response = await fetch(this.apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       const errorResponse = await response.json();

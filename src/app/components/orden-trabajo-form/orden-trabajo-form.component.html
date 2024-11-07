@@ -44,10 +44,19 @@
   
       <div class="form-group">
         <label for="tipoActivo">Tipo de Activo:</label>
-        <select id="tipoActivo" class="form-control" [(ngModel)]="ordenTrabajo.activo" (change)="onActivoChange($event)">
+        <select id="tipoActivo" class="form-control" (change)="onActivoChange($event)">
           <option value="">Seleccione un tipo de activo</option>
-          <option *ngFor="let activo of getUniqueActivos()" [value]="activo.id">{{ activo.tipo }}</option>
+          <option *ngFor="let activo of activos" [value]="activo.tipo">{{ activo.tipo }}</option>
         </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tarea asociada:</label>
+        <select id="tarea" class="form-control"  (change)="onTareaChange($event)">
+          <option *ngFor="let tarea of tarea" [value]="tarea.id_tarea">{{ tarea.tarea }}</option>
+      
+        </select>
+        
       </div>
   
       <button class="submit-button" (click)="enviarSolicitud()">Enviar Solicitud</button>

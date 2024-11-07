@@ -11,4 +11,5 @@ export interface OrdenTrabajo {
     tipoActivo: string;
     solicitante: string;
     instrucciones: string;
+    activo_tarea: string;
 }
