@@ -21,12 +21,17 @@ import { CommonModule } from '@angular/common';
 })
 export class OrdenTrabajoFormComponent implements OnInit {
   ordenTrabajo: OrdenTrabajo = {
+    id: 0,
     operario: '',
-    edificio: '',
-    piso: '',
+    edificio: 0,
+    piso: 0,
     sector: '',
     ubicacion: '',
     activo: '',
+    nombre: '',
+    fecha: '',
+    tipoActivo: '',
+    solicitante: '',
     instrucciones: ''
   };
 
@@ -167,11 +172,11 @@ export class OrdenTrabajoFormComponent implements OnInit {
   }
 
   onEdificioChange(event: any) {
-    this.ordenTrabajo.edificio = String(event.target.value);
+    this.ordenTrabajo.edificio = Number(event.target.value);
   }
 
   onPisoChange(event: any) {
-    this.ordenTrabajo.piso = String(event.target.value);
+    this.ordenTrabajo.piso = Number(event.target.value);
   }
 
   onSectorChange(event: any) {

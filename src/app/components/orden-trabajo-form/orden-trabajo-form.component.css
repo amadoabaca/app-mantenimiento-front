@@ -13,7 +13,7 @@
 .form-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   font-size: 14px;
   background: linear-gradient(180deg, #A0C4FF 0%, #4D9DE0 100%);
   padding: 10px;

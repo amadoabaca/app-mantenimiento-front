@@ -2,12 +2,12 @@ export interface OrdenTrabajo {
     id: number;
     operario: string;
     nombre: string;
-    fecha: number;
+    fecha: string;
     sector: string;
-    edificio: string;
+    edificio: number;
     activo: string;
     ubicacion: string;
-    piso: string;
+    piso: number;
     tipoActivo: string;
     solicitante: string;
     instrucciones: string;
