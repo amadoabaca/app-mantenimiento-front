@@ -12,6 +12,13 @@ import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
 import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
 import { CommonModule } from '@angular/common';
 import { ActivoTarea} from '../../interfaces/activo-tarea'  
+import { Activo} from '../../interfaces/activo'  
+import { Edificio } from '../../interfaces/edificio'
+import { Piso } from '../../interfaces/piso'    
+import { Sector } from '../../interfaces/sector' 
+import { UbicacionActivo } from '../../interfaces/ubicacion' 
+import { Tarea } from '../../interfaces/tarea' 
+
 
 @Component({
   selector: 'app-orden-trabajo-form',
@@ -37,19 +44,18 @@ export class OrdenTrabajoFormComponent implements OnInit {
     activo_tarea: ''
   };
 
-  operarios: any[] = [];
+  operarios: OrdenTrabajo[] = [];
   edificios: any[] = [];
   pisos: any[] = [];
   sectores: any[] = [];
   ubicaciones: any[] = [];
   activos: any[] = [];
-  tarea: any[] = [];
+  tarea: ActivoTarea[] = [];
   relaciones: ActivoTarea[] = [];
 
   constructor(
     private router: Router,
     private activoTareaService: ActivoTareaService, 
-    private userService: UserService,
     private ubicacionService: UbicacionService,
     private tareaService: TareaService,
     private sectorService: SectorService,
@@ -182,7 +188,7 @@ onActivoChange(event: Event) {
   const activoSeleccionado = this.activos.find(activo => activo.tipo === selectedTipo);
 
   if (activoSeleccionado) {
-      this.tarea = activoSeleccionado.tareas; 
+      this.tarea = activoSeleccionado.tarea; 
       this.ordenTrabajo.activo_tarea = ''; 
       console.log('Tareas para el activo seleccionado:', this.tarea);
   }

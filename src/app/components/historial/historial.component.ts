@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
+import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
 
 @Component({
   selector: 'app-historial',
@@ -12,36 +13,36 @@ import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
   styleUrls: ['./historial.component.css']
 })
 export class HistorialComponent implements OnInit {
-  listaOrdenes: any[] = [];
-  filteredOrdenes: any[] = [];
+  listaOrdenes: OrdenTrabajo[] = [];
+  ordenesFiltradas: OrdenTrabajo[] = []; 
   ordenesCargadas: boolean = false;
-  searchTerm: string = '';
+  busqueda: string = ''; 
 
   constructor(
     private router: Router, 
     private ordenService: OrdenTrabajoService
   ) {}
 
-  ngOnInit(): void {
-    this.fetchOrdenes();
+  ngOnInit(): void{
+    this.obtenerOrdenes();
   }
 
-  async fetchOrdenes() {
+  async obtenerOrdenes() {
     try {
       const data = await this.ordenService.listaOrdenTrabajo();
       this.listaOrdenes = data;
-      this.filteredOrdenes = data;
+      this.ordenesFiltradas = data;
       this.ordenesCargadas = true;
     } catch (error) {
-      console.error('Error al buscar las órdenes de trabajo:', error);
+      console.error('Error al buscar las ordenes de trabajo: ', error);
     }
   }
 
   onSearch() {
-    this.filteredOrdenes = this.listaOrdenes.filter(orden => {
-      return this.searchTerm
-        ? orden.activo.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
-          orden.sector?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    this.ordenesFiltradas = this.listaOrdenes.filter(orden => {
+      return this.busqueda
+        ? orden.activo.toLowerCase().includes(this.busqueda.toLowerCase()) || 
+          orden.sector?.toLowerCase().includes(this.busqueda.toLowerCase())
         : true;
     });
   }

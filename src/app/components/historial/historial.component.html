@@ -15,7 +15,7 @@
         class="busqueda" 
         placeholder="Activo o Sector" 
         type="text" 
-        [(ngModel)]="searchTerm" 
+        [(ngModel)]="busqueda" 
         (input)="onSearch()"
       >
     </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div *ngIf="ordenesCargadas">
-      <div *ngFor="let orden of filteredOrdenes" class="solicitud-item">
+      <div *ngFor="let orden of ordenesFiltradas" class="solicitud-item">
         <div class="solicitud-info">
           <p class="solicitud-title">{{ orden.activo }}</p>
           <small>{{ orden.ubicacion }}</small>
