@@ -19,7 +19,7 @@ import { ActivoTarea } from '../../interfaces/activo-tarea';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './orden-trabajo-form.component.html',
-  styleUrls: ['./orden-trabajo-form.component.css']
+  styleUrls: ['./orden-trabajo-form.component.css'],
 })
 export class OrdenTrabajoFormComponent implements OnInit {
   ordenTrabajo: OrdenTrabajo = {
@@ -29,11 +29,11 @@ export class OrdenTrabajoFormComponent implements OnInit {
     piso: '',
     sector: '',
     ubicacion: '',
-    activo_tarea: []  // Array donde se almacenarán las tareas seleccionadas
+    activo_tarea: [], // Array donde se almacenarán las tareas seleccionadas
   };
 
-  activos: ActivoTarea[] = [];  // Aquí almacenaremos los activos
-  tarea: any[] = [];  // Tareas asociadas al activo seleccionado
+  activos: ActivoTarea[] = []; // Aquí almacenaremos los activos
+  tarea: any[] = []; // Tareas asociadas al activo seleccionado
   operarios: any[] = [];
   edificios: any[] = [];
   pisos: any[] = [];
@@ -43,7 +43,7 @@ export class OrdenTrabajoFormComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private activoTareaService: ActivoTareaService, 
+    private activoTareaService: ActivoTareaService,
     private userService: UserService,
     private ubicacionService: UbicacionService,
     private tareaService: TareaService,
@@ -68,7 +68,7 @@ export class OrdenTrabajoFormComponent implements OnInit {
       this.obtenerPisos(),
       this.obtenerSectores(),
       this.obtenerUbicaciones(),
-      this.obtenerActivos()  
+      this.obtenerActivos(),
     ]);
   }
 
@@ -78,19 +78,19 @@ export class OrdenTrabajoFormComponent implements OnInit {
 
   async obtenerEdificios(): Promise<void> {
     try {
-      this.edificios = await this.edificioService.obtenerEdificios(); 
+      this.edificios = await this.edificioService.obtenerEdificios();
     } catch (error) {
       console.error('Error al obtener edificios:', error);
-      this.edificios = []; 
+      this.edificios = [];
     }
   }
 
   async obtenerPisos(): Promise<void> {
     try {
-      this.pisos = await this.pisoService.obtenerPisos(); 
+      this.pisos = await this.pisoService.obtenerPisos();
     } catch (error) {
       console.error('Error al obtener pisos:', error);
-      this.pisos = []; 
+      this.pisos = [];
     }
   }
 
@@ -99,7 +99,7 @@ export class OrdenTrabajoFormComponent implements OnInit {
       this.sectores = await this.sectorService.obtenerSectores();
     } catch (error) {
       console.error('Error al obtener sectores:', error);
-      this.sectores = []; 
+      this.sectores = [];
     }
   }
 
@@ -108,107 +108,111 @@ export class OrdenTrabajoFormComponent implements OnInit {
       this.ubicaciones = await this.ubicacionService.obtenerUbicaciones();
     } catch (error) {
       console.error('Error al obtener ubicaciones:', error);
-      this.ubicaciones = []; 
+      this.ubicaciones = [];
     }
   }
 
   async obtenerActivos(): Promise<void> {
     try {
+      const activos = await this.activoService.obtenerActivos();
 
-      const activos = await this.activoService.obtenerActivos(); 
-
-      this.activos = activos.map(activo => ({
+      this.activos = activos.map((activo) => ({
         id_activo: activo.id_activo,
         tipo: activo.tipo,
 
-        id_tarea: '', 
+        id_tarea: '',
         tarea: '',
       }));
-  
     } catch (error) {
       console.error('Error al obtener activos:', error);
-      this.activos = []; 
+      this.activos = [];
     }
   }
-  
+
   getUniqueEdificios() {
-    const unique = new Set(this.edificios.map(edificio => edificio.nombre));
-    return Array.from(unique).map(nombre => 
-      this.edificios.find(edificio => edificio.nombre === nombre)
+    const unique = new Set(this.edificios.map((edificio) => edificio.nombre));
+    return Array.from(unique).map((nombre) =>
+      this.edificios.find((edificio) => edificio.nombre === nombre)
     );
   }
-  
+
   getUniquePisos() {
-    const unique = new Set(this.pisos.map(piso => piso.piso));
-    return Array.from(unique).map(piso => 
-      this.pisos.find(p => p.piso === piso)
+    const unique = new Set(this.pisos.map((piso) => piso.piso));
+    return Array.from(unique).map((piso) =>
+      this.pisos.find((p) => p.piso === piso)
     );
   }
-  
+
   getUniqueSectores() {
-    const unique = new Set(this.sectores.map(sector => sector.sector));
-    return Array.from(unique).map(sector => 
-      this.sectores.find(s => s.sector === sector)
+    const unique = new Set(this.sectores.map((sector) => sector.sector));
+    return Array.from(unique).map((sector) =>
+      this.sectores.find((s) => s.sector === sector)
     );
   }
-  
+
   getUniqueUbicaciones() {
-    const unique = new Set(this.ubicaciones.map(ubicacion => ubicacion.ubicacion));
-    return Array.from(unique).map(ubicacion => 
-      this.ubicaciones.find(u => u.ubicacion === ubicacion)
+    const unique = new Set(
+      this.ubicaciones.map((ubicacion) => ubicacion.ubicacion)
+    );
+    return Array.from(unique).map((ubicacion) =>
+      this.ubicaciones.find((u) => u.ubicacion === ubicacion)
     );
   }
 
-async onActivoChange(event: Event): Promise<void> {
-  const selectedActivoId = (event.target as HTMLSelectElement).value;
+  async onActivoChange(event: Event): Promise<void> {
+    const selectedActivoId = (event.target as HTMLSelectElement).value;
 
-  if (selectedActivoId) {
-    try {
+    if (selectedActivoId) {
+      try {
+        const tareasParaActivo = await this.activoTareaService.obtenerTareas(
+          selectedActivoId
+        );
 
-      const tareasParaActivo = await this.activoTareaService.obtenerTareas(selectedActivoId);
+        this.tarea = tareasParaActivo;
 
-     
-      this.tarea = tareasParaActivo;
+        console.log('Tareas para el activo seleccionado:', this.tarea);
 
-      console.log('Tareas para el activo seleccionado:', this.tarea);
+        const tareasUnicas = Array.from(
+          new Set(
+            this.tarea.map((tarea) => `${selectedActivoId}-${tarea.id_tarea}`)
+          )
+        );
 
-      const tareasUnicas = Array.from(new Set(this.tarea.map(tarea => `${selectedActivoId}-${tarea.id_tarea}`)));
+        this.ordenTrabajo.activo_tarea = tareasUnicas;
 
- 
-      this.ordenTrabajo.activo_tarea = tareasUnicas;
-
-      console.log('Formato de tareas para enviar al backend (sin duplicados):', this.ordenTrabajo.activo_tarea);
-      
-    } catch (error) {
-      console.error('Error al obtener tareas del activo:', error);
-      this.tarea = []; 
+        console.log(
+          'Formato de tareas para enviar al backend (sin duplicados):',
+          this.ordenTrabajo.activo_tarea
+        );
+      } catch (error) {
+        console.error('Error al obtener tareas del activo:', error);
+        this.tarea = [];
+      }
+    } else {
+      this.tarea = [];
+      this.ordenTrabajo.activo_tarea = [];
     }
-  } else {
-    this.tarea = [];  
-    this.ordenTrabajo.activo_tarea = []; 
   }
-}
   onTareaChange(event: Event) {
-    const selectedTareas = Array.from((event.target as HTMLSelectElement).selectedOptions)
-      .map(option => option.value);
+    const selectedTareas = Array.from(
+      (event.target as HTMLSelectElement).selectedOptions
+    ).map((option) => option.value);
 
-    this.ordenTrabajo.activo_tarea = selectedTareas;  
+    this.ordenTrabajo.activo_tarea = selectedTareas;
   }
 
   async enviarSolicitud(): Promise<void> {
-   
-
     try {
-   
-      this.ordenTrabajo.id_activo = this.ordenTrabajo.activo_tarea[0];  
-      const response = await this.ordenTrabajoService.crearOrdenTrabajo(this.ordenTrabajo);
+      this.ordenTrabajo.id_activo = this.ordenTrabajo.activo_tarea[0];
+      const response = await this.ordenTrabajoService.crearOrdenTrabajo(
+        this.ordenTrabajo
+      );
       console.log('Orden de trabajo creada:', response);
       this.router.navigate(['/dashboard-admin']);
     } catch (error) {
       console.error('Error al crear la orden de trabajo:', error);
     }
   }
-
 
   onEdificioChange(event: any) {
     this.ordenTrabajo.edificio = String(event.target.value);

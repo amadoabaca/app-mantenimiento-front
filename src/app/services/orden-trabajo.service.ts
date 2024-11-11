@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { OrdenTrabajo } from '../interfaces/orden-trabajo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdenTrabajoService {
   private apiUrl = 'http://localhost:3000/api/orden-trabajo';
-  constructor() { }
+  constructor() {}
 
   async crearOrdenTrabajo(orden: OrdenTrabajo): Promise<OrdenTrabajo> {
     const response = await fetch(this.apiUrl, {
@@ -22,15 +22,14 @@ export class OrdenTrabajoService {
     if (response.ok) {
       console.log('Orden de trabajo creada:', result);
       alert(`Orden de trabajo creada con ID: ${result.id}`);
-      return result; 
+      return result;
     } else {
       console.error('Error al crear la orden:', result);
       alert(`Error: ${result.error}`);
-      throw new Error(result.error); 
+      throw new Error(result.error);
     }
   }
 
-  
   async listaOrdenTrabajo(): Promise<OrdenTrabajo[]> {
     const response = await fetch(this.apiUrl);
 
@@ -44,10 +43,13 @@ export class OrdenTrabajoService {
 
   async getOrdenesTrabajo() {
     try {
-      const response = await fetch('http://localhost:3000/api/orden-trabajo-detallada', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
+      const response = await fetch(
+        'http://localhost:3000/api/orden-trabajo-detallada',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       if (!response.ok) throw new Error('Failed to fetch ordenes de trabajo');
       return await response.json();
     } catch (error) {
@@ -56,7 +58,6 @@ export class OrdenTrabajoService {
     }
   }
 
-  
   async deleteOrdenTrabajo(id: any): Promise<OrdenTrabajo> {
     const response = await fetch(`${this.apiUrl}/${id}`, {
       method: 'DELETE',
@@ -70,7 +71,6 @@ export class OrdenTrabajoService {
     return await response.json();
   }
 
-  
   async updateOrdenTrabajo(id: any, ot: OrdenTrabajo): Promise<OrdenTrabajo> {
     const response = await fetch(`${this.apiUrl}/${id}`, {
       method: 'PATCH',

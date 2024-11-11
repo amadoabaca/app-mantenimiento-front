@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Activo } from '../interfaces/activo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivoService {
-
   private apiUrl = 'http://localhost:3000/api/activos';
 
   constructor() {}
-
 
   async obtenerActivos(): Promise<Activo[]> {
     const response = await fetch(this.apiUrl, {
@@ -43,4 +41,3 @@ export class ActivoService {
     return await response.json();
   }
 }
-

@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private apiUrl = 'http://localhost:3000/api';
 
-  private apiUrl = 'http://localhost:3000/api'; 
-
-  constructor() { }
+  constructor() {}
 
   async obtenerOperarios(): Promise<User[]> {
     const response = await fetch(`${this.apiUrl}/lista-usuarios`);
@@ -18,8 +17,13 @@ export class UserService {
     return response.json();
   }
 
-  
-  async registrarOperario(userData: { nombre: string; area: string; contraseña: string; email: string; apellido: string }): Promise<any> {
+  async registrarOperario(userData: {
+    nombre: string;
+    area: string;
+    contraseña: string;
+    email: string;
+    apellido: string;
+  }): Promise<any> {
     const response = await fetch(`${this.apiUrl}/register`, {
       method: 'POST',
       headers: {
@@ -29,15 +33,16 @@ export class UserService {
     });
 
     if (!response.ok) {
-      const errorData = await response.json(); 
+      const errorData = await response.json();
       throw new Error('Error al registrar operario');
-    
     }
     return response.json();
   }
 
-  
-  async login(credentials: { nombre: string; contraseña: string }): Promise<any> {
+  async login(credentials: {
+    nombre: string;
+    contraseña: string;
+  }): Promise<any> {
     const response = await fetch(`${this.apiUrl}/login`, {
       method: 'POST',
       headers: {
@@ -51,5 +56,4 @@ export class UserService {
     }
     return response.json();
   }
-
 }

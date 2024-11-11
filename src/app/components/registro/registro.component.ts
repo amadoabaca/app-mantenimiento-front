@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
@@ -25,27 +25,24 @@ export class RegistroComponent {
   }
 
   async register() {
-  
     if (!this.username || !this.apellido || !this.email || !this.password) {
       this.errorMessage = 'Todos los campos son obligatorios.';
       return;
     }
 
-    
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(this.email)) {
       this.errorMessage = 'Por favor, ingrese un email válido.';
       return;
     }
 
-    
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; 
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordPattern.test(this.password)) {
-      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.';
+      this.errorMessage =
+        'La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.';
       return;
     }
 
-    
     this.errorMessage = '';
 
     const userData = {
@@ -53,7 +50,7 @@ export class RegistroComponent {
       area: this.tipoUsuario,
       contraseña: this.password,
       email: this.email,
-      apellido: this.apellido
+      apellido: this.apellido,
     };
 
     try {

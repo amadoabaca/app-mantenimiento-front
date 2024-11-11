@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+  styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent implements OnInit {
   email = '';
@@ -20,11 +20,11 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.imageUrl = params['image'];
       this.role = params['role'];
     });
@@ -34,14 +34,22 @@ export class LoginFormComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-async login() {
-  const credentials = { email: this.email, contraseña: this.password, role: this.role };
-  const response = await this.authService.login(credentials);
+  async login() {
+    const credentials = {
+      email: this.email,
+      contraseña: this.password,
+      role: this.role,
+    };
+    const response = await this.authService.login(credentials);
 
-  if (response && response.token) {
-    this.router.navigate(this.role === 'administrativo' ? ['/dashboard-admin'] : ['/dashboard-operario']);
-  } else {
-    console.error('Login failed');
+    if (response && response.token) {
+      this.router.navigate(
+        this.role === 'administrativo'
+          ? ['/dashboard-admin']
+          : ['/dashboard-operario']
+      );
+    } else {
+      console.error('Login failed');
+    }
   }
-}
 }
