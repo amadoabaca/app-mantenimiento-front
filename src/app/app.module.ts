@@ -17,7 +17,6 @@ import { RegistroComponent } from './components/registro/registro.component';
     ],
     providers: [provideHttpClient()], 
 
-    bootstrap: [AppComponent,],
   })
   export class AppModule { }
 
