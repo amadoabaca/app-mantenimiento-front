@@ -1,4 +1,4 @@
-# Documentación del Frontend
+# Documentación Frontend para el proyecto final en la FRVT UTN
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 18.2.7.
 
