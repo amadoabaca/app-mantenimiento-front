@@ -7,28 +7,62 @@ import { OrdenTrabajoDetalleComponent } from './components/orden-trabajo/orden-t
 import { OrdenTrabajoFormComponent } from './components/orden-trabajo-form/orden-trabajo-form.component';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
 import { DashboardOperarioComponent } from './components/dashboard-operario/dashboard-operario.component';
+import { GestionComponent } from './components/gestion/gestion.component';
+import { GestionActivosComponent } from './components/gestion/gestion-activos/gestion-activos.component';
+
 import { HistorialComponent } from './components/historial/historial.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  {
+    path: 'gestion',
+    component: GestionComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'administrativo' },
+  },
+  {
+    path: 'gestion-activos',
+    component: GestionActivosComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'administrativo' },
+  },
   { path: 'login-form', component: LoginFormComponent },
-  { path: 'registro', component: RegistroComponent },
-  { path: 'orden-trabajo', component: OrdenTrabajoDetalleComponent },
-  { path: 'orden-trabajo-form', component: OrdenTrabajoFormComponent },
+  {
+    path: 'registro',
+    component: RegistroComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'administrativo' },
+  },
+  {
+    path: 'orden-trabajo',
+    component: OrdenTrabajoDetalleComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'administrativo' },
+  },
+  {
+    path: 'orden-trabajo-form',
+    component: OrdenTrabajoFormComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'administrativo' },
+  },
   {
     path: 'dashboard-admin',
     component: DashboardAdminComponent,
     canActivate: [AuthGuard],
-    data: { area: 'administrativo' },
+    data: { role: 'administrativo' },
   },
   {
     path: 'dashboard-operario',
     component: DashboardOperarioComponent,
     canActivate: [AuthGuard],
-    data: { area: 'operario' },
+    data: { role: 'operario' },
   },
-  { path: 'historial', component: HistorialComponent },
+  {
+    path: 'historial',
+    component: HistorialComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

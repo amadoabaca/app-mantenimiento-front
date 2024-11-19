@@ -37,4 +37,7 @@ export class DashboardAdminComponent {
   navigateToHistorial() {
     this.router.navigate(['/historial']);
   }
+  navigateToGestion() {
+    this.router.navigate(['/gestion']);
+  }
 }

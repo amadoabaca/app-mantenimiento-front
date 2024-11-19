@@ -14,7 +14,21 @@ export class UserService {
     if (!response.ok) {
       throw new Error('Error al obtener operarios');
     }
-    return response.json();
+    return response.json() as Promise<User[]>;
+  }
+
+  async getOperarios(): Promise<User[]> {
+    try {
+      const response = await fetch(`${this.apiUrl}/operarios`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to fetch operarios');
+      return response.json() as Promise<User[]>;
+    } catch (error) {
+      console.error('Error fetching operarios:', error);
+      return [];
+    }
   }
 
   async registrarOperario(userData: {
@@ -23,7 +37,7 @@ export class UserService {
     contraseña: string;
     email: string;
     apellido: string;
-  }): Promise<any> {
+  }): Promise<{ message: string }> {
     const response = await fetch(`${this.apiUrl}/register`, {
       method: 'POST',
       headers: {
@@ -34,15 +48,16 @@ export class UserService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error('Error al registrar operario');
+      throw new Error(errorData.message || 'Error al registrar operario');
     }
-    return response.json();
+
+    return response.json() as Promise<{ message: string }>;
   }
 
   async login(credentials: {
     nombre: string;
     contraseña: string;
-  }): Promise<any> {
+  }): Promise<string> {
     const response = await fetch(`${this.apiUrl}/login`, {
       method: 'POST',
       headers: {
@@ -54,6 +69,11 @@ export class UserService {
     if (!response.ok) {
       throw new Error('Error al iniciar sesión');
     }
-    return response.json();
+
+    const data = (await response.json()) as { token: string };
+    if (data.token) {
+      document.cookie = `token=${data.token}; path=/; secure; samesite=strict;`;
+    }
+    return data.token;
   }
 }

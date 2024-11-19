@@ -40,7 +40,26 @@ export class OrdenTrabajoService {
 
     return await response.json();
   }
+  async getOrdenesTrabajoFiltradas(activo: string, operario: string) {
+    const params = new URLSearchParams();
+    if (activo) params.append('activo', activo);
+    if (operario) params.append('operario', operario);
 
+    const response = await fetch(
+      `http://localhost:3000/api/orden-trabajo-filtrada?${params.toString()}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.error('Error al obtener las órdenes de trabajo filtradas');
+      return [];
+    }
+  }
   async getOrdenesTrabajo() {
     try {
       const response = await fetch(
@@ -57,8 +76,24 @@ export class OrdenTrabajoService {
       return [];
     }
   }
-
-  async deleteOrdenTrabajo(id: any): Promise<OrdenTrabajo> {
+  async getOrdenesTrabajoPorOperario() {
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/orden-trabajo/operario',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      if (!response.ok)
+        throw new Error('Failed to fetch ordenes de trabajo del operario');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching ordenes de trabajo del operario:', error);
+      return [];
+    }
+  }
+  async deleteOrdenTrabajo(id: number): Promise<OrdenTrabajo> {
     const response = await fetch(`${this.apiUrl}/${id}`, {
       method: 'DELETE',
     });
@@ -71,7 +106,10 @@ export class OrdenTrabajoService {
     return await response.json();
   }
 
-  async updateOrdenTrabajo(id: any, ot: OrdenTrabajo): Promise<OrdenTrabajo> {
+  async updateOrdenTrabajo(
+    id: number,
+    ot: OrdenTrabajo
+  ): Promise<OrdenTrabajo> {
     const response = await fetch(`${this.apiUrl}/${id}`, {
       method: 'PATCH',
       headers: {

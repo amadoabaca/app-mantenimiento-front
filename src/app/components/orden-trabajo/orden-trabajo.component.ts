@@ -1,18 +1,18 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
-import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
-import { DashboardAdminComponent } from '../dashboard-admin/dashboard-admin.component'
+import { OrdenTrabajoBackend } from '../../interfaces/orden-trabajo-backend';
+
 @Component({
   selector: 'app-orden-trabajo-detalle',
   templateUrl: './orden-trabajo.component.html',
-  styleUrls: ['./orden-trabajo.component.css'] ,
+  styleUrls: ['./orden-trabajo.component.css'],
   standalone: true,
-  imports: [DashboardAdminComponent,CommonModule]
+  imports: [CommonModule],
 })
 export class OrdenTrabajoDetalleComponent implements OnInit {
-  ordenesTrabajo: any[] = [];
+  ordenesTrabajo: OrdenTrabajoBackend[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -20,10 +20,10 @@ export class OrdenTrabajoDetalleComponent implements OnInit {
     private ordenTrabajoService: OrdenTrabajoService
   ) {}
 
-  
-    async ngOnInit() {
-      this.ordenesTrabajo = await this.ordenTrabajoService.getOrdenesTrabajo();
-    }
+  async ngOnInit() {
+    this.ordenesTrabajo = await this.ordenTrabajoService.getOrdenesTrabajo();
+  }
+
   goBack() {
     this.router.navigate(['/dashboard-operario']);
   }

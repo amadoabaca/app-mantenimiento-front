@@ -1,41 +1,37 @@
 <section class="orden-trabajo-container">
   <div class="header">
-    <div class="back-arrow" (click)="goBack()">
-      <img src="../../../assets/arrow.png" alt="Back">
-    </div>
-
-    <section>
+      <div class="back-arrow" (click)="goBack()">
+          <img src="../../../assets/arrow.png" alt="Back">
+      </div>
       <h2>Órdenes de Trabajo</h2>
+  </div>
+  <div class="table-container">
       <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-
-            <th>Edificio</th>
-            <th>Piso</th>
-            <th>Sector</th>
-            <th>Ubicación</th>
-            <th>Activo</th>
-            <th>Tarea</th>
-            <th>Usuario</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ot of ordenesTrabajo">
-            <td>{{ ot.orden_trabajo_id }}</td>
-
-
-            <td>{{ ot.edificio_nombre }}</td>
-            <td>{{ ot.piso_nombre }}</td>
-            <td>{{ ot.sector_nombre }}</td>
-            <td>{{ ot.ubicacion_nombre }}</td>
-            <td>{{ ot.activo_tipo }}</td>
-            <td>{{ ot.tarea_descripcion }}</td>
-            <td>{{ ot.nombre_usuario }}</td>
-          </tr>
-        </tbody>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Edificio</th>
+                  <th>Piso</th>
+                  <th>Sector</th>
+                  <th>Ubicación</th>
+                  <th>Activo</th>
+                  <th>Tarea</th>
+                 
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let ot of ordenesTrabajo">
+                  <td>{{ ot.orden_trabajo_id }}</td>
+                  <td>{{ ot.edificio_nombre }}</td>
+                  <td>{{ ot.piso_nombre }}</td>
+                  <td>{{ ot.sector_nombre }}</td>
+                  <td>{{ ot.ubicacion_nombre }}</td>
+                  <td>{{ ot.activo_tipo }}</td>
+                  <td>{{ ot.tarea_descripcion }}</td>
+            
+              </tr>
+          </tbody>
       </table>
-    </section>
+  </div>
 
-
-    <app-dashboard-admin [ordenesTrabajo]="ordenesTrabajo"></app-dashboard-admin>
+</section>
