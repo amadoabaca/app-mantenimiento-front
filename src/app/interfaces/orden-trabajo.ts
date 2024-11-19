@@ -1,15 +1,10 @@
 export interface OrdenTrabajo {
-    id: number;
-    operario: string;
-    nombre: string;
-    fecha: string;
-    sector: string;
-    edificio: number;
-    activo: string;
-    ubicacion: string;
-    piso: number;
-    tipoActivo: string;
-    solicitante: string;
-    instrucciones: string;
-    activo_tarea: string;
+  id: number;
+  operario: string;
+  sector: string;
+  edificio: string;
+  ubicacion: string;
+  piso: string;
+  id_activo_tarea: string;
+  id_activo?: string;
 }

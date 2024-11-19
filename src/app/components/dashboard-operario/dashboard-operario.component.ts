@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
+import { OrdenTrabajoBackend } from '../../interfaces/orden-trabajo-backend';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { OrdenTrabajoService } from '../../services/orden-trabajo.service';
-import { OrdenTrabajo } from '../../interfaces/orden-trabajo';
-import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-dashboard-operario',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './dashboard-operario.component.html',
-  styleUrl: './dashboard-operario.component.css'
+  styleUrls: ['./dashboard-operario.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class DashboardOperarioComponent implements OnInit {
-  ordenesTrabajo: OrdenTrabajo[] = [];
+  listaOrdenes: OrdenTrabajoBackend[] = [];
 
   constructor(
-    private router: Router,
-    private ordenTrabajoService: OrdenTrabajoService
+    private ordenTrabajoService: OrdenTrabajoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,11 +24,7 @@ export class DashboardOperarioComponent implements OnInit {
   }
 
   async cargarOrdenesTrabajo(): Promise<void> {
-    try {
-      this.ordenesTrabajo = await this.ordenTrabajoService.listaOrdenTrabajo();
-    } catch (error) {
-      console.error('Error al cargar las órdenes de trabajo:', error);
-    }
+    this.listaOrdenes = await this.ordenTrabajoService.getOrdenesTrabajo();
   }
 
   goBack() {
